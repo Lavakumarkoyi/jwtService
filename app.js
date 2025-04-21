@@ -15,26 +15,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: 'http://127.0.0.1:550', 
+  origin: ['http://127.0.0.1:5501', 'https://www.cuone.org/'], 
   methods: ['POST'], 
   maxAge: 86400
 }));
 
 
 app.post('/visifi-sts', function (req, res) {
-  const allowedOrigins = ['http://127.0.0.1:550'];
-  const origin = req.headers.origin;
-  const referer = req.headers.referer;
-
-  if (origin && !allowedOrigins.includes(origin)) {
-    return res.status(403).send('Origin not allowed');
-  }
-
-
-  if (referer && !referer.startsWith('http://127.0.0.1:550')) {
-    return res.status(403).send('Referer not allowed');
-  }
-
   let identity = req.body.identity;
   let tenant = (req.body.tenant) ? req.body.tenant : config.tenant;
   let clientId = config[tenant].clientId;
