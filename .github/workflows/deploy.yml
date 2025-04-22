@@ -35,7 +35,6 @@ jobs:
         run: |
           # Exclude development files
           zip -r release.zip . \
-            -x 'node_modules/*' \
             -x '.git/*' \
             -x '.github/*' \
             -x '*.env*' \
